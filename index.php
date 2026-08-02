@@ -224,4 +224,39 @@
 
 </section>
 
+<!--CTA SECTION-->
+<section id="cta">
+
+    <h2>
+        Ready to Start Your
+        <span class="text-red">Guitar Journey?</span>
+    </h2>
+
+    <p>
+        Create a free account to unlock all 4 tools completely free.
+    </p>
+
+    <div class="cta-buttons">
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="/guitarghar/recommender.php" class="btn-red btn-lg">
+                Get a Recommendation
+            </a>
+            <a href="/guitarghar/lessons.php" class="btn-outline btn-lg">
+                Continue Learning
+            </a>
+        <?php else: ?>
+            <a href="/guitarghar/register.php" class="btn-red btn-lg">
+                Create Free Account
+            </a>
+            <a href="/guitarghar/recommender.php" class="btn-outline btn-lg">
+                Try Recommender
+            </a>
+        <?php endif; ?>
+    </div>
+
+</section>
+
+
+<?php include 'includes/footer.php'; ?>
+
 

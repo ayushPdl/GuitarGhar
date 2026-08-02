@@ -249,6 +249,65 @@
     font-size: 18px;
 }
 
+/* ---- CTA ---- */
+#cta{
+    background-color: #111111;
+    border-top: 1px solid #1e1e1e;
+    padding: 100px 80px;
+    text-align: center;
+}
+
+#cta h2{
+    font-size: 38px;
+    font-weight: 900;
+    color: #f0f0f0;
+    margin-bottom: 16px;
+}
+
+#cta p{
+    font-size: 17px;
+    color: #777777;
+    margin-bottom: 36px;
+}
+
+.cta-buttons{
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.text-red{
+    color: #e8352a;
+}
+
+.section-eyebrow{
+    font-size: 12px;
+    font-weight: 700;
+    color: #e8352a;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.section-title{
+    font-size: 38px;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 12px;
+}
+
+.section-subtitle{
+    font-size: 16px;
+    color: #777777;
+    margin-bottom: 40px;
+}
+
+.section-p1{
+    padding: 80px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
 
 
 
