@@ -161,3 +161,67 @@
 
 </section>
 
+<!--HOW IT WORKS SECTION -->
+<section id="how-it-works" class="section-p1">
+
+    <div class="section-eyebrow">Simple To Use</div>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">
+        Get started in minutes. No experience required.
+    </p>
+
+    <div class="how-grid">
+
+        <div class="how-step">
+            <div class="how-number">01</div>
+            <h4>Create Your Account</h4>
+            <p>
+                Register for free. Your guitar builds and
+                lesson progress are all saved to your profile.
+            </p>
+        </div>
+
+        <div class="how-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
+
+        <div class="how-step">
+            <div class="how-number">02</div>
+            <h4>Pick a Tool</h4>
+            <p>
+                Choose from 4 unique guitar companion tools
+                from the navigation bar at the top.
+            </p>
+        </div>
+
+        <div class="how-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
+
+        <div class="how-step">
+            <div class="how-number">03</div>
+            <h4>Use the Features</h4>
+            <p>
+                Get personalised recommendations, design
+                your guitar, tune a string or watch lessons.
+            </p>
+        </div>
+
+        <div class="how-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
+
+        <div class="how-step">
+            <div class="how-number">04</div>
+            <h4>Track Your Progress</h4>
+            <p>
+                Your lessons and saved builds are always
+                waiting when you come back to the site.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+

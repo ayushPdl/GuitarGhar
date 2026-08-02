@@ -209,5 +209,46 @@
     color: #e8352a;
 }
 
+/* ---- HOW IT WORKS ---- */
+#how-it-works{
+    background-color: #0a0a0a;
+}
+
+.how-grid{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.how-step{
+    flex: 1;
+    min-width: 180px;
+    background-color: #141414;
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    padding: 28px 24px;
+    text-align: center;
+}
+
+.how-number{
+    font-size: 40px;
+    font-weight: 900;
+    color: #e8352a;
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.how-arrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    padding-top: 40px;
+    color: #444444;
+    font-size: 18px;
+}
+
+
 
 
