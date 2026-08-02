@@ -93,3 +93,121 @@
     height: 36px;
     background-color: #444444;
 }
+
+/* ---- FEATURES ---- */
+#features{
+    background-color: #0d0d0d;
+}
+
+.features-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.feature-card{
+    background-color: #141414;
+    border: 1px solid #1e1e1e;
+    border-radius: 10px;
+    padding: 32px;
+    display: block;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.feature-card:hover{
+    border-color: #e8352a;
+    transform: translateY(-3px);
+}
+
+.feature-icon{
+    width: 52px;
+    height: 52px;
+    background-color: #1a0808;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #e8352a;
+}
+
+.feature-card h4{
+    font-size: 18px;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 12px;
+}
+
+.feature-card p{
+    font-size: 15px;
+    color: #666666;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    margin-top: 0;
+}
+
+.feature-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.tag{
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    color: #777777;
+}
+
+.feature-link{
+    font-size: 14px;
+    font-weight: 700;
+    color: #e8352a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s ease;
+}
+
+.feature-card:hover .feature-link{
+    gap: 10px;
+}
+
+/* SECTION LAYOUT HELPERS */
+
+.section-eyebrow{
+    font-size: 12px;
+    font-weight: 700;
+    color: #e8352a;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.section-title{
+    font-size: 38px;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.section-subtitle{
+    font-size: 17px;
+    color: #777777;
+    margin-bottom: 48px;
+    max-width: 560px;
+}
+
+.text-red{
+    color: #e8352a;
+}
+
+
+
