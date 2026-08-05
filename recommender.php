@@ -1,8 +1,9 @@
-﻿<?php include 'includes/navbar.php'; ?>
-<link rel="stylesheet" href="/guitarghar/css/recommender.css">
-
-
-    <div class="rec-header">
+<?php
+$page_title = 'AI Guitar Recommender | GuitarGhar';
+$page_css = '/guitarghar/css/recommender.css';
+include 'includes/navbar.php';
+?>
+<div class="page-header rec-header">
         <h1>AI Guitar Recommender</h1>
         <p>
             Answer 4 quick questions and our AI will suggest

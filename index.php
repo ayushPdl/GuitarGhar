@@ -1,5 +1,8 @@
-﻿<?php include 'includes/navbar.php'; ?>
-<link rel="stylesheet" href="/guitarghar/css/index.css">
+<?php
+$page_title = 'GuitarGhar | Home';
+$page_css = '/guitarghar/css/index.css';
+include 'includes/navbar.php';
+?>
 
 <!-- HERO SECTION -->
 <section id="hero">

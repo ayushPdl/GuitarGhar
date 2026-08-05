@@ -1,9 +1,9 @@
-﻿/* ==========================================
+/* ==========================================
    MY DESIGNS PAGE STYLES
 ========================================== */
 
 .designs-page {
-    padding: 60px 40px;
+    padding: 0 0 60px 0;
     min-height: calc(100vh - 70px);
 }
 
@@ -210,7 +210,7 @@
 /* Responsive */
 @media (max-width: 768px) {
     .designs-page {
-        padding: 40px 20px;
+        padding: 0 0 60px 0;
     }
 
     .design-grid {
@@ -219,7 +219,7 @@
 }
 @media (max-width: 480px) {
     .designs-page {
-        padding: 28px 16px;
+        padding: 0 0 60px 0;
     }
 
     .design-grid {

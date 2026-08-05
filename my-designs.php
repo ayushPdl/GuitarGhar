@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
@@ -25,20 +25,19 @@ $SHAPE_LABELS = [
     'sg'       => 'SG',
     'acoustic' => 'Acoustic',
 ];
+$page_title = 'My Designs | GuitarGhar';
+$page_css = '/guitarghar/css/my-designs.css';
+include 'includes/navbar.php';
 ?>
-
-<?php include "includes/navbar.php"; ?>
-
-<link rel="stylesheet" href="/guitarghar/css/my-designs.css">
 
 <section class="designs-page">
 
-    <div class="container">
-
+    <div class="page-header designs-header">
         <h1>My Guitar Designs</h1>
-        <p class="subtitle">
-            All your saved custom guitar builds.
-        </p>
+        <p>All your saved custom guitar builds.</p>
+    </div>
+
+    <div class="container">
 
         <div class="design-grid" id="design-grid">
 

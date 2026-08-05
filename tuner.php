@@ -1,10 +1,13 @@
-<?php include 'includes/navbar.php'; ?>
-<link rel="stylesheet" href="/guitarghar/css/tuner.css">
-<?php include 'includes/db.php'; ?>
+<?php
+$page_title = 'Guitar Tuner | GuitarGhar';
+$page_css = '/guitarghar/css/tuner.css';
+include 'includes/navbar.php';
+include 'includes/db.php';
+?>
 
 <section id="tuner-page">
 
-    <div class="tuner-header">
+    <div class="page-header tuner-header">
         <h1>Guitar Tuner</h1>
         <p>
             Real-time browser-based tuner. Allow microphone

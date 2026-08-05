@@ -1,4 +1,4 @@
-﻿// ==========================================
+// ==========================================
 // GUITARGHAR - GUITAR TUNER
 // Uses Web Audio API and pitch detection
 // ==========================================
@@ -274,13 +274,6 @@ function updatePitch() {
                 setText('tuner-status', 'Almost there...');
                 setClass('tuner-status', 'tuner-status status-close');
             }
-        } else if (cents < -5) {
-                setText('tuner-status', 'Too Flat - tune up'); setClass('tuner-status', 'tuner-status status-flat');
-            } else if (cents > 5) {
-                setText('tuner-status', 'Too Sharp - tune down'); setClass('tuner-status', 'tuner-status status-sharp');
-            } else {
-                setText('tuner-status', 'Almost there...'); setClass('tuner-status', 'tuner-status status-close');
-            }
         }
 
     } else {
@@ -291,6 +284,7 @@ function updatePitch() {
 
     rafId = requestAnimationFrame(updatePitch);
 }
+
 
 // ==========================================
 // START / STOP TUNER

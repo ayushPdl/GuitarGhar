@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 include 'includes/db.php';
 
@@ -43,9 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$page_title = 'Register | GuitarGhar';
+$page_css = '/guitarghar/css/register.css';
 include 'includes/navbar.php';
 ?>
-<link rel="stylesheet" href="/guitarghar/css/register.css">
 
 <section id="register-page">
 

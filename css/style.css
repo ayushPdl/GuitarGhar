@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* ==========================================
    GUITARGHAR - MAIN STYLESHEET
@@ -93,6 +93,7 @@ img{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 24px;
     padding: 0 80px;
     height: 70px;
     background-color: #111111;
@@ -101,6 +102,14 @@ img{
     top: 0;
     left: 0;
     z-index: 999;
+}
+
+.nav-right{
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-left: auto;
+    min-width: 0;
 }
 
 #header .logo{
@@ -472,6 +481,62 @@ a.btn-ghost:hover{
 }
 
 
+
+/* Shared page header — matches tuner page */
+.page-header{
+    padding: 60px 80px 32px 80px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.page-header h1{
+    font-size: 38px;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.page-header p{
+    font-size: 16px;
+    color: #777777;
+    margin: 0;
+    max-width: 720px;
+    line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+    .page-header{
+        padding: 48px 40px 28px 40px;
+    }
+
+    .page-header h1{
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 799px) {
+    .page-header{
+        padding: 36px 24px 24px 24px;
+    }
+
+    .page-header h1{
+        font-size: 28px;
+    }
+
+    .page-header p{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header{
+        padding: 28px 16px 20px 16px;
+    }
+
+    .page-header h1{
+        font-size: 24px;
+    }
+}
 /* ==========================================
    FOOTER
 ========================================== */

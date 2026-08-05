@@ -1,11 +1,13 @@
-﻿<?php include 'includes/navbar.php'; ?>
-<link rel="stylesheet" href="/guitarghar/css/builder.css">
-
-<?php include 'includes/db.php'; ?>
+<?php
+$page_title = 'Guitar Builder | GuitarGhar';
+$page_css = '/guitarghar/css/builder.css';
+include 'includes/navbar.php';
+include 'includes/db.php';
+?>
 
 <section id="builder-page">
 
-    <div class="builder-header">
+    <div class="page-header builder-header">
         <h1>Guitar Builder</h1>
         <p>
             Design your dream guitar. Select a body shape,

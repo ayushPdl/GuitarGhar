@@ -47,8 +47,8 @@
             <h4>Contact Us</h4>
             <ul class="footer-contact-info">
                 <li><i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</li>
-                <li><i class="fa-solid fa-envelope"></i> support@guitarghar.com</li>
-                <li><i class="fa-solid fa-phone"></i> +977 9800000000</li>
+                <li><i class="fa-solid fa-envelope"></i> ayush.poudel24@apexcollege.edu.np</li>
+                <li><i class="fa-solid fa-phone"></i> +977 9866022588</li>
             </ul>
         </div>
 

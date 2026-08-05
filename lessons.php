@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 include 'includes/db.php';
@@ -33,15 +33,14 @@ if ($user_id) {
     $stmt->close();
 }
 
+$page_title = 'Guitar Lessons | GuitarGhar';
+$page_css = '/guitarghar/css/lessons.css';
 include 'includes/navbar.php';
 ?>
-<link rel="stylesheet" href="/guitarghar/css/lessons.css">
 
-<div class="lessons-header">
-    <div class="header-container">
-        <h1>Structured Guitar Lessons</h1>
-        <p>Follow our step-by-step path from picking up the guitar to playing advanced solos.</p>
-    </div>
+<div class="page-header lessons-header">
+    <h1>Structured Guitar Lessons</h1>
+    <p>Follow our step-by-step path from picking up the guitar to playing advanced solos.</p>
 </div>
 
 <div class="level-tabs">

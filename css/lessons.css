@@ -1,8 +1,8 @@
-﻿/* GuitarGhar Lessons — dark theme */
+/* GuitarGhar Lessons — dark theme */
 
 .lessons-header {
     background-color: #111111;
-    padding: 60px 40px;
+    /* padding from .page-header */
     border-bottom: 1px solid #2a2a2a;
 }
 
