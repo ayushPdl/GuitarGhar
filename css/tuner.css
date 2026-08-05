@@ -1,0 +1,489 @@
+/* ==========================================
+   GUITARGHAR - GUITAR TUNER STYLES
+========================================== */
+
+/* ---- PAGE HEADER ---- */
+.tuner-header {
+    padding: 60px 80px 32px 80px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.tuner-header h1 {
+    font-size: 38px;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 8px;
+}
+
+.tuner-header p {
+    font-size: 16px;
+    color: #777777;
+    margin: 0;
+}
+
+
+/* ---- TWO COLUMN LAYOUT ---- */
+.tuner-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: calc(100vh - 220px);
+}
+
+
+/* ---- LEFT: CONTROLS ---- */
+.tuner-controls {
+    padding: 40px 32px;
+    border-right: 1px solid #1e1e1e;
+    background-color: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.tuner-control-box {
+    background-color: #141414;
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.tuner-control-box h4 {
+    font-size: 14px;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Tuning options */
+.tuning-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tuning-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    color: #888888;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.tuning-btn span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #555555;
+}
+
+.tuning-btn:hover {
+    border-color: #555555;
+    color: #f0f0f0;
+}
+
+.tuning-btn.active {
+    background-color: #1f0a09;
+    border-color: #e8352a;
+    color: #e8352a;
+}
+
+.tuning-btn.active span {
+    color: #aa4444;
+}
+
+/* String buttons */
+.string-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.string-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    color: #888888;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.string-number {
+    font-size: 12px;
+    color: #555555;
+}
+
+.string-note {
+    font-size: 16px;
+    font-weight: 800;
+    color: #cccccc;
+}
+
+.string-freq {
+    font-size: 11px;
+    color: #444444;
+}
+
+.string-btn:hover {
+    border-color: #555555;
+    color: #f0f0f0;
+}
+
+.string-btn.active {
+    background-color: #1f0a09;
+    border-color: #e8352a;
+}
+
+.string-btn.active .string-note {
+    color: #e8352a;
+}
+
+/* Tips box */
+.tuner-info-box {
+    background-color: #0d0d0d;
+    border-color: #1e1e1e;
+}
+
+.tuner-tips {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+.tuner-tips li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #666666;
+    line-height: 1.5;
+}
+
+.tuner-tips li i {
+    color: #e8352a;
+    font-size: 8px;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+
+/* ---- RIGHT: TUNER DISPLAY / LOGIN AREA ---- */
+.tuner-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    gap: 32px;
+    background-color: #0d0d0d;
+}
+
+/* Note display */
+.tuner-note-wrap {
+    text-align: center;
+}
+
+.tuner-note {
+    font-size: 120px;
+    font-weight: 900;
+    color: #e8352a;
+    line-height: 1;
+    margin-bottom: 8px;
+    min-width: 200px;
+    text-align: center;
+}
+
+.tuner-freq {
+    font-size: 18px;
+    font-weight: 600;
+    color: #555555;
+    text-align: center;
+}
+
+/* Meter */
+.tuner-meter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.meter-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #444444;
+    white-space: nowrap;
+}
+
+.tuner-meter {
+    flex: 1;
+    height: 16px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+    position: relative;
+}
+
+.meter-center {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #333333;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.meter-bar {
+    height: 100%;
+    width: 50%;
+    background-color: #e8352a;
+    border-radius: 8px;
+    transition: width 0.08s ease, background-color 0.2s ease;
+}
+
+/* Status */
+.tuner-status {
+    font-size: 20px;
+    font-weight: 700;
+    color: #555555;
+    text-align: center;
+}
+
+.status-intune {
+    color: #2ecc71;
+    font-size: 24px;
+}
+
+.status-flat {
+    color: #e8352a;
+}
+
+.status-sharp {
+    color: #e8352a;
+}
+
+.status-close {
+    color: #f39c12;
+}
+
+/* Target note */
+.tuner-target {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444444;
+    text-align: center;
+}
+
+/* Buttons */
+.tuner-buttons {
+    display: flex;
+    gap: 14px;
+}
+
+.tuner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background-color: #e8352a;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.tuner-btn:hover {
+    background-color: #c42d22;
+}
+
+.tuner-btn-stop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background-color: #1a1a1a;
+    color: #cccccc;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tuner-btn-stop:hover {
+    border-color: #e8352a;
+    color: #e8352a;
+}
+
+.tuner-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background-color: transparent;
+    color: #cccccc;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.tuner-btn-outline:hover {
+    border-color: #f0f0f0;
+    color: #f0f0f0;
+}
+
+/* Mic note */
+.tuner-mic-note {
+    font-size: 13px;
+    color: #444444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    margin: 0;
+}
+
+
+/* ---- INLINE LOGIN CARD (Replaces Tuner Area) ---- */
+.tuner-login-card {
+    background-color: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 48px 32px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    margin: auto;
+}
+
+.tuner-login-card .lock-icon {
+    font-size: 48px;
+    color: #e8352a;
+    margin-bottom: 20px;
+}
+
+.tuner-login-card h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 12px;
+}
+
+.tuner-login-card p {
+    font-size: 14px;
+    color: #888888;
+    margin-bottom: 28px;
+    line-height: 1.5;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+
+/* ==========================================
+   RESPONSIVE STYLES
+========================================== */
+
+@media(max-width: 1024px) {
+    .tuner-header {
+        padding: 40px 40px 28px 40px;
+    }
+
+    .tuner-layout {
+        grid-template-columns: 280px 1fr;
+    }
+
+    .tuner-controls {
+        padding: 32px 20px;
+    }
+}
+
+@media(max-width: 799px) {
+    .tuner-header {
+        padding: 32px 20px;
+    }
+
+    .tuner-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .tuner-controls {
+        border-right: none;
+        border-bottom: 1px solid #1e1e1e;
+        padding: 24px 20px;
+    }
+
+    .tuner-display {
+        padding: 40px 20px;
+    }
+
+    .tuner-note {
+        font-size: 90px;
+    }
+
+    .tuner-meter-wrap {
+        max-width: 100%;
+    }
+}
+
+@media(max-width: 480px) {
+    .tuner-note {
+        font-size: 72px;
+    }
+
+    .tuner-header h1 {
+        font-size: 28px;
+    }
+
+    .tuner-buttons,
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .tuner-btn,
+    .tuner-btn-stop,
+    .tuner-btn-outline {
+        width: 100%;
+        justify-content: center;
+    }
+}
