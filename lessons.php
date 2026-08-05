@@ -1,16 +1,7 @@
 <?php
 session_start();
 
-// Database connection
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db   = 'guitarghar';
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'includes/db.php';
 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
