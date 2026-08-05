@@ -1,46 +1,45 @@
-<?php
+﻿<?php
 session_start();
-include "includes/db.php";
+header('Content-Type: application/json');
 
-header("Content-Type: application/json");
+include 'includes/db.php';
 
-if (!isset($_SESSION["user_id"])) {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode([
-        "success" => false,
-        "message" => "Please login first."
+        'success' => false,
+        'message' => 'Please login first.'
     ]);
     exit();
 }
 
-$user_id = $_SESSION["user_id"];
+$user_id = (int) $_SESSION['user_id'];
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["build_id"])) {
-    $build_id = intval($_POST["build_id"]);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['build_id'])) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Invalid request.'
+    ]);
+    exit();
+}
 
-    // Ensure the build belongs to the logged-in user
-    $sql = "DELETE FROM guitar_builds WHERE id = ? AND user_id = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ii", $build_id, $user_id);
+$build_id = (int) $_POST['build_id'];
 
-    if (mysqli_stmt_execute($stmt)) {
-        if (mysqli_stmt_affected_rows($stmt) > 0) {
-            echo json_encode(["success" => true]);
-        } else {
-            echo json_encode([
-                "success" => false,
-                "message" => "Design not found or permission denied."
-            ]);
-        }
+$sql  = 'DELETE FROM guitar_builds WHERE id = ? AND user_id = ?';
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, 'ii', $build_id, $user_id);
+
+if (mysqli_stmt_execute($stmt)) {
+    if (mysqli_stmt_affected_rows($stmt) > 0) {
+        echo json_encode(['success' => true]);
     } else {
         echo json_encode([
-            "success" => false,
-            "message" => mysqli_error($conn)
+            'success' => false,
+            'message' => 'Design not found or permission denied.'
         ]);
     }
 } else {
     echo json_encode([
-        "success" => false,
-        "message" => "Invalid request."
+        'success' => false,
+        'message' => 'Could not delete design. Please try again.'
     ]);
 }
-

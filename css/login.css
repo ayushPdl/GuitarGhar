@@ -1,4 +1,4 @@
-
+﻿
 #login-page{
     display: flex;
     min-height: calc(100vh - 70px);
@@ -188,6 +188,11 @@
 }
 
 @media(max-width: 799px){
+
+    .login-guitar{
+        width: 160px;
+        margin-bottom: 24px;
+    }
 
     #login-page{
         flex-direction: column;

@@ -4,7 +4,7 @@
 
 /* ---- PAGE HEADER ---- */
 .tuner-header {
-    padding: 60px 80px 32px 80px;
+    /* padding from .page-header */
     border-bottom: 1px solid #1e1e1e;
 }
 

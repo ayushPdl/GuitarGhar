@@ -20,6 +20,7 @@ html{
 body{
     width: 100%;
     background-color: #0d0d0d;
+    overflow-x: hidden;
     color: #f0f0f0;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -92,6 +93,7 @@ img{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 24px;
     padding: 0 80px;
     height: 70px;
     background-color: #111111;
@@ -100,6 +102,14 @@ img{
     top: 0;
     left: 0;
     z-index: 999;
+}
+
+.nav-right{
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-left: auto;
+    min-width: 0;
 }
 
 #header .logo{
@@ -268,37 +278,42 @@ img{
     display: none;
 }
 
-/* Mobile slide-out menu */
-#mobile-menu{
+/* Mobile auth links — hidden on desktop */
+.nav-auth-mobile{
     display: none;
-    flex-direction: column;
-    background-color: #111111;
-    border-bottom: 1px solid #1e1e1e;
-    padding: 20px 30px;
-    gap: 4px;
 }
 
-#mobile-menu.open{
-    display: flex;
+.nav-close-wrap{
+    display: none;
+    list-style: none;
 }
 
-#mobile-menu a{
-    font-size: 16px;
+.nav-logout-mobile{
+    background: none;
+    border: none;
+    font-family: 'Spartan', sans-serif;
+    font-size: 15px;
     font-weight: 600;
-    color: #888888;
-    padding: 12px 0;
-    border-bottom: 1px solid #1e1e1e;
+    color: #e8352a;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-register-mobile{
+    color: #e8352a !important;
+}
+
+/* Mobile nav overlay */
+#nav-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 998;
+}
+
+#nav-overlay.active{
     display: block;
-    transition: color 0.2s ease;
-}
-
-#mobile-menu a:last-child{
-    border-bottom: none;
-}
-
-#mobile-menu a:hover,
-#mobile-menu a.active{
-    color: #f0f0f0;
 }
 
 
@@ -466,6 +481,62 @@ a.btn-ghost:hover{
 }
 
 
+
+/* Shared page header — matches tuner page */
+.page-header{
+    padding: 60px 80px 32px 80px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.page-header h1{
+    font-size: 38px;
+    font-weight: 800;
+    color: #f0f0f0;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.page-header p{
+    font-size: 16px;
+    color: #777777;
+    margin: 0;
+    max-width: 720px;
+    line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+    .page-header{
+        padding: 48px 40px 28px 40px;
+    }
+
+    .page-header h1{
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 799px) {
+    .page-header{
+        padding: 36px 24px 24px 24px;
+    }
+
+    .page-header h1{
+        font-size: 28px;
+    }
+
+    .page-header p{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header{
+        padding: 28px 16px 20px 16px;
+    }
+
+    .page-header h1{
+        font-size: 24px;
+    }
+}
 /* ==========================================
    FOOTER
 ========================================== */
@@ -598,7 +669,7 @@ footer.site-footer {
 }
 
 .footer-logo-img {
-    height: 80px;
+    height: 56px;
     width: auto;
     display: block;
     margin-bottom: 16px;
@@ -713,6 +784,19 @@ footer.site-footer {
         display: none;
     }
 
+    .nav-auth-mobile{
+        display: list-item;
+    }
+
+    .nav-close-wrap{
+        display: list-item;
+    }
+
+    .navbar-logo-img{
+        height: 40px;
+    }
+
+
     .section-p1{
         padding: 40px 20px;
     }
@@ -808,10 +892,23 @@ footer.site-footer {
         display: none;
     }
 
+    .nav-auth-mobile{
+        display: list-item;
+    }
+
+    .nav-close-wrap{
+        display: list-item;
+    }
+
+    .navbar-logo-img{
+        height: 40px;
+    }
+
+
 }
 /* Navbar logo image */
 .navbar-logo-img{
-    height: 65px;
+    height: 48px;
     width: auto;
     display: block;
 }

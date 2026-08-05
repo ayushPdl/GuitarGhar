@@ -1,8 +1,9 @@
-<?php include 'includes/navbar.php'; ?>
-<link rel="stylesheet" href="/guitarghar/css/recommender.css">
-
-
-    <div class="rec-header">
+<?php
+$page_title = 'AI Guitar Recommender | GuitarGhar';
+$page_css = '/guitarghar/css/recommender.css';
+include 'includes/navbar.php';
+?>
+<div class="page-header rec-header">
         <h1>AI Guitar Recommender</h1>
         <p>
             Answer 4 quick questions and our AI will suggest
@@ -164,19 +165,32 @@ function getRecommendation() {
         document.getElementById('rec-loading').style.display    = 'none';
         
         if (data.error) {
-            // Show error message
             document.getElementById('rec-result-box').style.display = 'block';
-            document.getElementById('rec-result-text').innerHTML = 
-                '<div style="color: #721c24; background: #f8d7da; padding: 15px; border-radius: 8px;">' +
-                '<strong>âš ï¸ Sorry!</strong><br><br>' +
-                data.error + '<br><br>' +
-                'Please try again in a moment. The AI might be busy right now.' +
-                '</div>';
+            var resultEl = document.getElementById('rec-result-text');
+            resultEl.innerHTML = '';
+            var errBox = document.createElement('div');
+            errBox.style.cssText = 'color:#f8d7da;background:#3a1210;padding:15px;border-radius:8px;border:1px solid #5a1a16;';
+            var errTitle = document.createElement('strong');
+            errTitle.textContent = 'Sorry!';
+            errBox.appendChild(errTitle);
+            errBox.appendChild(document.createElement('br'));
+            errBox.appendChild(document.createElement('br'));
+            errBox.appendChild(document.createTextNode(data.error || 'Something went wrong.'));
+            errBox.appendChild(document.createElement('br'));
+            errBox.appendChild(document.createElement('br'));
+            errBox.appendChild(document.createTextNode('Please try again in a moment. The AI might be busy right now.'));
+            resultEl.appendChild(errBox);
         } else {
             document.getElementById('rec-result-box').style.display = 'block';
-            // Convert newlines to <br> tags for better display
-            var formattedResult = data.result.replace(/\n/g, '<br>');
-            document.getElementById('rec-result-text').innerHTML = formattedResult;
+            var resultEl = document.getElementById('rec-result-text');
+            resultEl.innerHTML = '';
+            var parts = (data.result || '').split('\n');
+            for (var i = 0; i < parts.length; i++) {
+                resultEl.appendChild(document.createTextNode(parts[i]));
+                if (i < parts.length - 1) {
+                    resultEl.appendChild(document.createElement('br'));
+                }
+            }
         }
     })
     .catch(function(error) {

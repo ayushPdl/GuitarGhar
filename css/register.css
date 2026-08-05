@@ -1,4 +1,4 @@
-
+﻿
 #register-page{
     display: flex;
     min-height: calc(100vh - 70px);
@@ -225,6 +225,12 @@
 }
 
 @media(max-width: 799px){
+
+    .register-guitar{
+        width: 160px;
+        margin-bottom: 24px;
+    }
+
 
     #register-page{
         flex-direction: column;

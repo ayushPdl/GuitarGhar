@@ -1,5 +1,8 @@
-<?php include 'includes/navbar.php'; ?>
-<link rel="stylesheet" href="/guitarghar/css/index.css">
+<?php
+$page_title = 'GuitarGhar | Home';
+$page_css = '/guitarghar/css/index.css';
+include 'includes/navbar.php';
+?>
 
 <!-- HERO SECTION -->
 <section id="hero">
@@ -47,7 +50,7 @@
             </div>
             <div class="hero-stat-divider"></div>
             <div class="hero-stat">
-                <div class="hero-stat-number">17</div>
+                <div class="hero-stat-number">30</div>
                 <div class="hero-stat-label">Guitar Lessons</div>
             </div>
             <div class="hero-stat-divider"></div>
