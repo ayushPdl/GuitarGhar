@@ -1,6 +1,6 @@
 <?php
 $page_title = 'Guitar Tuner | GuitarGhar';
-$page_css = '/guitarghar/css/tuner.css';
+$page_css = 'css/tuner.css';
 include 'includes/navbar.php';
 include 'includes/db.php';
 ?>
@@ -77,8 +77,8 @@ include 'includes/db.php';
                     <h2>Login Required</h2>
                     <p>You need a GuitarGhar account to use the real-time Guitar Tuner.</p>
                     <div class="btn-group">
-                        <a href="/guitarghar/login.php" class="tuner-btn">Login</a>
-                        <a href="/guitarghar/register.php" class="tuner-btn-outline">Create Free Account</a>
+                        <a href="<?php echo htmlspecialchars(url('login.php')); ?>" class="tuner-btn">Login</a>
+                        <a href="<?php echo htmlspecialchars(url('register.php')); ?>" class="tuner-btn-outline">Create Free Account</a>
                     </div>
                 </div>
 
@@ -129,6 +129,6 @@ include 'includes/db.php';
 <script>
     var IS_LOGGED_IN = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
 </script>
-<script src="/guitarghar/js/tuner.js"></script>
+<script src="<?php echo htmlspecialchars(url('js/tuner.js')); ?>"></script>
 
 <?php include 'includes/footer.php'; ?>

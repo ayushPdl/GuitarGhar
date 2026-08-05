@@ -1,6 +1,6 @@
 <?php
 $page_title = 'GuitarGhar | Home';
-$page_css = '/guitarghar/css/index.css';
+$page_css = 'css/index.css';
 include 'includes/navbar.php';
 ?>
 
@@ -27,17 +27,17 @@ include 'includes/navbar.php';
 
         <div class="hero-buttons">
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="/guitarghar/recommender.php" class="btn-red btn-lg">
+                <a href="<?php echo htmlspecialchars(url('recommender.php')); ?>" class="btn-red btn-lg">
                     Get Recommendation
                 </a>
-                <a href="/guitarghar/lessons.php" class="btn-outline btn-lg">
+                <a href="<?php echo htmlspecialchars(url('lessons.php')); ?>" class="btn-outline btn-lg">
                     Start Learning
                 </a>
             <?php else: ?>
-                <a href="/guitarghar/register.php" class="btn-red btn-lg">
+                <a href="<?php echo htmlspecialchars(url('register.php')); ?>" class="btn-red btn-lg">
                     Get Started Free
                 </a>
-                <a href="/guitarghar/login.php" class="btn-outline btn-lg">
+                <a href="<?php echo htmlspecialchars(url('login.php')); ?>" class="btn-outline btn-lg">
                     Login
                 </a>
             <?php endif; ?>
@@ -80,7 +80,7 @@ include 'includes/navbar.php';
 
     <div class="features-grid">
 
-        <a href="/guitarghar/recommender.php" class="feature-card">
+        <a href="<?php echo htmlspecialchars(url('recommender.php')); ?>" class="feature-card">
             <div class="feature-icon">
                 <i class="fa-solid fa-robot"></i>
             </div>
@@ -100,7 +100,7 @@ include 'includes/navbar.php';
             </div>
         </a>
 
-        <a href="/guitarghar/builder.php" class="feature-card">
+        <a href="<?php echo htmlspecialchars(url('builder.php')); ?>" class="feature-card">
             <div class="feature-icon">
                 <i class="fa-solid fa-palette"></i>
             </div>
@@ -120,7 +120,7 @@ include 'includes/navbar.php';
             </div>
         </a>
 
-        <a href="/guitarghar/tuner.php" class="feature-card">
+        <a href="<?php echo htmlspecialchars(url('tuner.php')); ?>" class="feature-card">
             <div class="feature-icon">
                 <i class="fa-solid fa-music"></i>
             </div>
@@ -140,7 +140,7 @@ include 'includes/navbar.php';
             </div>
         </a>
 
-        <a href="/guitarghar/lessons.php" class="feature-card">
+        <a href="<?php echo htmlspecialchars(url('lessons.php')); ?>" class="feature-card">
             <div class="feature-icon">
                 <i class="fa-solid fa-book-open"></i>
             </div>
@@ -241,17 +241,17 @@ include 'includes/navbar.php';
 
     <div class="cta-buttons">
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="/guitarghar/recommender.php" class="btn-red btn-lg">
+            <a href="<?php echo htmlspecialchars(url('recommender.php')); ?>" class="btn-red btn-lg">
                 Get a Recommendation
             </a>
-            <a href="/guitarghar/lessons.php" class="btn-outline btn-lg">
+            <a href="<?php echo htmlspecialchars(url('lessons.php')); ?>" class="btn-outline btn-lg">
                 Continue Learning
             </a>
         <?php else: ?>
-            <a href="/guitarghar/register.php" class="btn-red btn-lg">
+            <a href="<?php echo htmlspecialchars(url('register.php')); ?>" class="btn-red btn-lg">
                 Create Free Account
             </a>
-            <a href="/guitarghar/recommender.php" class="btn-outline btn-lg">
+            <a href="<?php echo htmlspecialchars(url('recommender.php')); ?>" class="btn-outline btn-lg">
                 Try Recommender
             </a>
         <?php endif; ?>

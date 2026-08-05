@@ -1,6 +1,6 @@
 <?php
 $page_title = 'Guitar Builder | GuitarGhar';
-$page_css = '/guitarghar/css/builder.css';
+$page_css = 'css/builder.css';
 include 'includes/navbar.php';
 include 'includes/db.php';
 ?>
@@ -25,19 +25,19 @@ include 'includes/db.php';
                 <h4>Body Shape</h4>
                 <div class="shape-grid">
                     <button class="shape-btn active" onclick="handleCustomization(function(el){ setShape('strat', el); }, this)">
-                        <img src="/guitarghar/img/strat.png" alt="Stratocaster">
+                        <img src="<?php echo htmlspecialchars(url('img/strat.png')); ?>" alt="Stratocaster">
                         <span>Stratocaster</span>
                     </button>
                     <button class="shape-btn" onclick="handleCustomization(function(el){ setShape('lespaul', el); }, this)">
-                        <img src="/guitarghar/img/lespaul.png" alt="Les Paul">
+                        <img src="<?php echo htmlspecialchars(url('img/lespaul.png')); ?>" alt="Les Paul">
                         <span>Les Paul</span>
                     </button>
                     <button class="shape-btn" onclick="handleCustomization(function(el){ setShape('sg', el); }, this)">
-                        <img src="/guitarghar/img/sg.png" alt="SG">
+                        <img src="<?php echo htmlspecialchars(url('img/sg.png')); ?>" alt="SG">
                         <span>SG</span>
                     </button>
                     <button class="shape-btn" onclick="handleCustomization(function(el){ setShape('acoustic', el); }, this)">
-                        <img src="/guitarghar/img/acoustic.png" alt="Acoustic">
+                        <img src="<?php echo htmlspecialchars(url('img/acoustic.png')); ?>" alt="Acoustic">
                         <span>Acoustic</span>
                     </button>
                 </div>
@@ -157,7 +157,7 @@ include 'includes/db.php';
                     </button>
                     <div class="save-msg" id="save-msg"></div>
                 <?php else: ?>
-                    <a href="/guitarghar/login.php" class="save-build-btn">
+                    <a href="<?php echo htmlspecialchars(url('login.php')); ?>" class="save-build-btn">
                         <i class="fa-solid fa-lock"></i>
                         Login to Save Build
                     </a>
@@ -182,8 +182,8 @@ include 'includes/db.php';
                 <h4>Login Required</h4>
                 <p>You need a GuitarGhar account to customize and design your guitar.</p>
                 <div class="prompt-btns">
-                    <a href="/guitarghar/login.php" class="btn-red btn-lg">Login</a>
-                    <a href="/guitarghar/register.php" class="btn-outline btn-lg">Register Free</a>
+                    <a href="<?php echo htmlspecialchars(url('login.php')); ?>" class="btn-red btn-lg">Login</a>
+                    <a href="<?php echo htmlspecialchars(url('register.php')); ?>" class="btn-outline btn-lg">Register Free</a>
                 </div>
             </div>
 
@@ -250,6 +250,6 @@ include 'includes/db.php';
     var IS_LOGGED_IN = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
 </script>
 
-<script src="/guitarghar/js/builder.js"></script>
+<script src="<?php echo htmlspecialchars(url('js/builder.js')); ?>"></script>
 
 <?php include 'includes/footer.php'; ?>

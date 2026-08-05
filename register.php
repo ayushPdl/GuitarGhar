@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/includes/paths.php';
 session_start();
 include 'includes/db.php';
 
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = 'Register | GuitarGhar';
-$page_css = '/guitarghar/css/register.css';
+$page_css = 'css/register.css';
 include 'includes/navbar.php';
 ?>
 
@@ -52,7 +53,7 @@ include 'includes/navbar.php';
 
     <div class="register-left">
         <img
-            src="/guitarghar/img/guitar.png"
+            src="<?php echo htmlspecialchars(url('img/guitar.png')); ?>"
             alt="Guitar"
             class="register-guitar"
         >
@@ -89,7 +90,7 @@ include 'includes/navbar.php';
             <h3>Create Your Account</h3>
             <p class="register-sub">
                 Already have an account?
-                <a href="/guitarghar/login.php">Login here</a>
+                <a href="<?php echo htmlspecialchars(url('login.php')); ?>">Login here</a>
             </p>
 
             <?php if ($error): ?>

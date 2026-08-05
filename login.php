@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/includes/paths.php';
 session_start();
 include 'includes/db.php';
 
@@ -22,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id']   = $user['id'];
             $_SESSION['full_name'] = $user['full_name'];
             $_SESSION['email']     = $email;
-            header('Location: /guitarghar/index.php');
+            header('Location: ' . url('index.php'));
             exit();
         }
 
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page_title = 'Login | GuitarGhar';
-$page_css = '/guitarghar/css/login.css';
+$page_css = 'css/login.css';
 include 'includes/navbar.php';
 ?>
 
@@ -39,7 +40,7 @@ include 'includes/navbar.php';
 
     <div class="login-left">
         <img
-            src="/guitarghar/img/guitar.png"
+            src="<?php echo htmlspecialchars(url('img/guitar.png')); ?>"
             alt="Guitar"
             class="login-guitar"
         >
@@ -57,7 +58,7 @@ include 'includes/navbar.php';
             <h3>Login to GuitarGhar</h3>
             <p class="login-sub">
                 Don't have an account?
-                <a href="/guitarghar/register.php">Register free</a>
+                <a href="<?php echo htmlspecialchars(url('register.php')); ?>">Register free</a>
             </p>
 
             <?php if ($error): ?>

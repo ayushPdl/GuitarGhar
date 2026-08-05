@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/paths.php';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -21,49 +23,62 @@ if (!isset($page_css)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($page_title); ?></title>
-    <link rel="stylesheet" href="/guitarghar/css/style.css">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(url('css/style.css')); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <?php foreach ($page_css as $css_href): ?>
-        <link rel="stylesheet" href="<?php echo htmlspecialchars($css_href); ?>">
+        <?php
+            $href = (strpos($css_href, 'http') === 0 || strpos($css_href, '//') === 0)
+                ? $css_href
+                : url(preg_replace('#^/?(guitarghar/)?#', '', $css_href));
+        ?>
+        <link rel="stylesheet" href="<?php echo htmlspecialchars($href); ?>">
     <?php endforeach; ?>
+    <script>
+window.APP_BASE = <?php echo json_encode(GG_BASE_PATH); ?>;
+function appUrl(path) {
+    path = String(path || '').replace(/^\/+/, '');
+    var base = (typeof APP_BASE === 'string') ? APP_BASE : '';
+    return (base ? base : '') + '/' + path;
+}
+</script>
 </head>
 <body>
 
 <header id="header">
 
-    <a href="/guitarghar/index.php" class="logo">
-        <img src="/guitarghar/img/logo.png" alt="GuitarGhar" class="navbar-logo-img">
+    <a href="<?php echo htmlspecialchars(url('index.php')); ?>" class="logo">
+        <img src="<?php echo htmlspecialchars(url('img/logo.png')); ?>" alt="GuitarGhar" class="navbar-logo-img">
     </a>
 
     <div class="nav-right">
 
         <ul id="navbar">
             <li>
-                <a href="/guitarghar/index.php"
+                <a href="<?php echo htmlspecialchars(url('index.php')); ?>"
                    class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">
                     Home
                 </a>
             </li>
             <li>
-                <a href="/guitarghar/recommender.php"
+                <a href="<?php echo htmlspecialchars(url('recommender.php')); ?>"
                    class="<?php echo ($current_page == 'recommender.php') ? 'active' : ''; ?>">
                     Recommender
                 </a>
             </li>
             <li>
-                <a href="/guitarghar/builder.php"
+                <a href="<?php echo htmlspecialchars(url('builder.php')); ?>"
                    class="<?php echo ($current_page == 'builder.php') ? 'active' : ''; ?>">
                     Builder
                 </a>
             </li>
             <li>
-                <a href="/guitarghar/tuner.php"
+                <a href="<?php echo htmlspecialchars(url('tuner.php')); ?>"
                    class="<?php echo ($current_page == 'tuner.php') ? 'active' : ''; ?>">
                     Tuner
                 </a>
             </li>
             <li>
-                <a href="/guitarghar/lessons.php"
+                <a href="<?php echo htmlspecialchars(url('lessons.php')); ?>"
                    class="<?php echo ($current_page == 'lessons.php') ? 'active' : ''; ?>">
                     Lessons
                 </a>
@@ -71,25 +86,25 @@ if (!isset($page_css)) {
 
             <?php if (isset($_SESSION['user_id'])): ?>
                 <li class="nav-auth-mobile">
-                    <a href="/guitarghar/my-designs.php"
+                    <a href="<?php echo htmlspecialchars(url('my-designs.php')); ?>"
                        class="<?php echo ($current_page == 'my-designs.php') ? 'active' : ''; ?>">
                         My Designs
                     </a>
                 </li>
                 <li class="nav-auth-mobile">
-                    <form action="/guitarghar/logout.php" method="POST" style="margin: 0;">
+                    <form action="<?php echo htmlspecialchars(url('logout.php')); ?>" method="POST" style="margin: 0;">
                         <button type="submit" class="nav-logout-mobile">Logout</button>
                     </form>
                 </li>
             <?php else: ?>
                 <li class="nav-auth-mobile">
-                    <a href="/guitarghar/login.php"
+                    <a href="<?php echo htmlspecialchars(url('login.php')); ?>"
                        class="<?php echo ($current_page == 'login.php') ? 'active' : ''; ?>">
                         Login
                     </a>
                 </li>
                 <li class="nav-auth-mobile">
-                    <a href="/guitarghar/register.php"
+                    <a href="<?php echo htmlspecialchars(url('register.php')); ?>"
                        class="nav-register-mobile <?php echo ($current_page == 'register.php') ? 'active' : ''; ?>">
                         Register
                     </a>
@@ -112,12 +127,12 @@ if (!isset($page_css)) {
                         <i class="fa-solid fa-chevron-down" style="font-size: 11px;"></i>
                     </button>
                     <div class="user-dropdown" id="user-dropdown">
-                        <a href="/guitarghar/my-designs.php">
+                        <a href="<?php echo htmlspecialchars(url('my-designs.php')); ?>">
                             <i class="fa-solid fa-guitar" style="margin-right: 8px;"></i>
                             My Designs
                         </a>
                         <div class="dropdown-sep"></div>
-                        <form action="/guitarghar/logout.php" method="POST" style="margin: 0;">
+                        <form action="<?php echo htmlspecialchars(url('logout.php')); ?>" method="POST" style="margin: 0;">
                             <button type="submit" class="logout-btn">
                                 <i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i>
                                 Logout
@@ -126,14 +141,14 @@ if (!isset($page_css)) {
                     </div>
                 </div>
             <?php else: ?>
-                <a href="/guitarghar/login.php" class="btn-ghost btn-sm">Login</a>
-                <a href="/guitarghar/register.php" class="btn-red btn-sm">Register</a>
+                <a href="<?php echo htmlspecialchars(url('login.php')); ?>" class="btn-ghost btn-sm">Login</a>
+                <a href="<?php echo htmlspecialchars(url('register.php')); ?>" class="btn-red btn-sm">Register</a>
             <?php endif; ?>
         </div>
 
         <div id="mobile">
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="/guitarghar/my-designs.php" title="My Designs">
+                <a href="<?php echo htmlspecialchars(url('my-designs.php')); ?>" title="My Designs">
                     <i class="fa-solid fa-guitar" style="font-size: 20px; color: #e8352a;"></i>
                 </a>
             <?php endif; ?>
