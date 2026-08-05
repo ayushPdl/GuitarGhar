@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -18,12 +18,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 <div id="header">
 
-    <!-- Logo image — put your logo file in images/ and name it logo.png -->
     <a href="/guitarghar/index.php" class="logo">
         <img src="/guitarghar/img/logo.png" alt="GuitarGhar" class="navbar-logo-img">
     </a>
 
-    <!-- Desktop Navigation -->
     <ul id="navbar">
         <li>
             <a href="/guitarghar/index.php"
@@ -56,11 +54,29 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </a>
         </li>
 
-        <!-- Close button mobile only -->
-        <i id="close" class="fa-solid fa-xmark" onclick="closeMobileMenu()"></i>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <li class="nav-auth-mobile">
+                <a href="/guitarghar/my-designs.php">My Designs</a>
+            </li>
+            <li class="nav-auth-mobile">
+                <form action="/guitarghar/logout.php" method="POST" style="margin: 0;">
+                    <button type="submit" class="nav-logout-mobile">Logout</button>
+                </form>
+            </li>
+        <?php else: ?>
+            <li class="nav-auth-mobile">
+                <a href="/guitarghar/login.php">Login</a>
+            </li>
+            <li class="nav-auth-mobile">
+                <a href="/guitarghar/register.php" class="nav-register-mobile">Register</a>
+            </li>
+        <?php endif; ?>
+
+        <li class="nav-close-wrap">
+            <i id="close" class="fa-solid fa-xmark" onclick="closeMobileMenu()" aria-label="Close menu"></i>
+        </li>
     </ul>
 
-    <!-- Desktop Auth -->
     <div class="navbar-auth" id="navbar-auth">
 
         <?php if (isset($_SESSION['user_id'])): ?>
@@ -97,74 +113,30 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     </div>
 
-    <!-- Mobile icons -->
     <div id="mobile">
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="/guitarghar/my-designs.php" title="My Designs">
                 <i class="fa-solid fa-guitar" style="font-size: 20px; color: #e8352a; padding-left: 20px;"></i>
             </a>
         <?php endif; ?>
-        <i id="bar" class="fa-solid fa-bars" onclick="openMobileMenu()"></i>
+        <i id="bar" class="fa-solid fa-bars" onclick="openMobileMenu()" aria-label="Open menu"></i>
     </div>
 
 </div>
 
-<!-- Mobile slide menu -->
-<div id="mobile-menu">
-
-    <a href="/guitarghar/index.php"
-       class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">
-        Home
-    </a>
-    <a href="/guitarghar/recommender.php"
-       class="<?php echo ($current_page == 'recommender.php') ? 'active' : ''; ?>">
-        Recommender
-    </a>
-    <a href="/guitarghar/builder.php"
-       class="<?php echo ($current_page == 'builder.php') ? 'active' : ''; ?>">
-        Builder
-    </a>
-    <a href="/guitarghar/tuner.php"
-       class="<?php echo ($current_page == 'tuner.php') ? 'active' : ''; ?>">
-        Tuner
-    </a>
-    <a href="/guitarghar/lessons.php"
-       class="<?php echo ($current_page == 'lessons.php') ? 'active' : ''; ?>">
-        Lessons
-    </a>
-
-    <?php if (isset($_SESSION['user_id'])): ?>
-        <a href="/guitarghar/my-designs.php">My Designs</a>
-        <form action="/guitarghar/logout.php" method="POST" style="margin: 0;">
-            <button type="submit" style="
-                background: none;
-                border: none;
-                font-family: 'Spartan', sans-serif;
-                font-size: 16px;
-                font-weight: 600;
-                color: #e8352a;
-                padding: 12px 0;
-                cursor: pointer;
-                width: 100%;
-                text-align: left;
-            ">
-                Logout
-            </button>
-        </form>
-    <?php else: ?>
-        <a href="/guitarghar/login.php">Login</a>
-        <a href="/guitarghar/register.php">Register</a>
-    <?php endif; ?>
-
-</div>
+<div id="nav-overlay" onclick="closeMobileMenu()"></div>
 
 <script>
 function openMobileMenu() {
     document.getElementById('navbar').classList.add('active');
+    document.getElementById('nav-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeMobileMenu() {
     document.getElementById('navbar').classList.remove('active');
+    document.getElementById('nav-overlay').classList.remove('active');
+    document.body.style.overflow = '';
 }
 
 function toggleUserMenu() {
@@ -178,6 +150,12 @@ document.addEventListener('click', function(e) {
         if (dropdown) {
             dropdown.classList.remove('open');
         }
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeMobileMenu();
     }
 });
 </script>

@@ -1,4 +1,4 @@
-/* ==========================================
+﻿/* ==========================================
    RECOMMENDER PAGE STYLES
 ========================================== */
 
@@ -265,6 +265,14 @@
 /* Responsive */
 @media(max-width: 799px) {
 
+    .rec-header {
+        padding: 40px 24px 24px 24px;
+    }
+
+    .rec-header h1 {
+        font-size: 28px;
+    }
+
     .rec-layout {
         grid-template-columns: 1fr;
     }
@@ -318,4 +326,18 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 8px;
+}
+
+@media(max-width: 480px) {
+    .rec-header {
+        padding: 32px 16px 20px 16px;
+    }
+
+    .rec-header h1 {
+        font-size: 24px;
+    }
+
+    .rec-header p {
+        font-size: 14px;
+    }
 }

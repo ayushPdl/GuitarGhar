@@ -1,61 +1,51 @@
-<?php include 'includes/navbar.php'; ?>
-<link rel="stylesheet" href="/guitarghar/css/register.css">
-
-<?php
+﻿<?php
+session_start();
 include 'includes/db.php';
 
-$error = "";
-$success = "";
+$error = '';
+$success = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $full_name = isset($_POST['full_name']) ? trim($_POST['full_name']) : '';
+    $email     = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $password  = isset($_POST['password']) ? $_POST['password'] : '';
+    $confirm   = isset($_POST['confirm']) ? $_POST['confirm'] : '';
 
-    $full_name = trim($_POST["full_name"]);
-    $email     = trim($_POST["email"]);
-    $password  = $_POST["password"];
-    $confirm   = $_POST["confirm"];
-
-    // Basic validation
-    if (empty($full_name) || empty($email) || empty($password) || empty($confirm)) {
-        $error = "All fields are required.";
-
+    if ($full_name === '' || $email === '' || $password === '' || $confirm === '') {
+        $error = 'All fields are required.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Please enter a valid email address.";
-
+        $error = 'Please enter a valid email address.';
     } elseif (strlen($password) < 6) {
-        $error = "Password must be at least 6 characters.";
-
+        $error = 'Password must be at least 6 characters.';
     } elseif ($password !== $confirm) {
-        $error = "Passwords do not match.";
-
+        $error = 'Passwords do not match.';
     } else {
-
-        // Check if email already exists
-        $check_sql    = "SELECT id FROM users WHERE email = ?";
-        $check_stmt   = mysqli_prepare($conn, $check_sql);
-        mysqli_stmt_bind_param($check_stmt, "s", $email);
+        $check_sql  = 'SELECT id FROM users WHERE email = ?';
+        $check_stmt = mysqli_prepare($conn, $check_sql);
+        mysqli_stmt_bind_param($check_stmt, 's', $email);
         mysqli_stmt_execute($check_stmt);
         mysqli_stmt_store_result($check_stmt);
 
         if (mysqli_stmt_num_rows($check_stmt) > 0) {
-            $error = "An account with this email already exists.";
-
+            $error = 'An account with this email already exists.';
         } else {
-
-            // Hash password and insert user
-            $hashed   = password_hash($password, PASSWORD_DEFAULT);
-            $sql      = "INSERT INTO users (full_name, email, password) VALUES (?, ?, ?)";
-            $stmt     = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "sss", $full_name, $email, $hashed);
+            $hashed = password_hash($password, PASSWORD_DEFAULT);
+            $sql    = 'INSERT INTO users (full_name, email, password) VALUES (?, ?, ?)';
+            $stmt   = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, 'sss', $full_name, $email, $hashed);
 
             if (mysqli_stmt_execute($stmt)) {
-                $success = "Account created successfully! You can now login.";
+                $success = 'Account created successfully! You can now login.';
             } else {
-                $error = "Something went wrong. Please try again.";
+                $error = 'Something went wrong. Please try again.';
             }
         }
     }
 }
+
+include 'includes/navbar.php';
 ?>
+<link rel="stylesheet" href="/guitarghar/css/register.css">
 
 <section id="register-page">
 
@@ -184,13 +174,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php include 'includes/footer.php'; ?>
 
 <script>
-// Toggle password visibility
 function togglePassword(fieldId) {
     var field = document.getElementById(fieldId);
-    if (field.type === "password") {
-        field.type = "text";
+    if (field.type === 'password') {
+        field.type = 'text';
     } else {
-        field.type = "password";
+        field.type = 'password';
     }
 }
 </script>

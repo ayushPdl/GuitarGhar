@@ -1,46 +1,38 @@
-<?php include 'includes/navbar.php'; ?>
-<link rel="stylesheet" href="/guitarghar/css/login.css">
-
-<?php
+﻿<?php
+session_start();
 include 'includes/db.php';
 
-$error = "";
+$error = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email    = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    $email    = trim($_POST["email"]);
-    $password = $_POST["password"];
-
-    if (empty($email) || empty($password)) {
-        $error = "Please fill in all fields.";
-
+    if ($email === '' || $password === '') {
+        $error = 'Please fill in all fields.';
     } else {
-
-        // Find user by email
-        $sql  = "SELECT id, full_name, password FROM users WHERE email = ?";
+        $sql  = 'SELECT id, full_name, password FROM users WHERE email = ?';
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_bind_param($stmt, 's', $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $user   = mysqli_fetch_assoc($result);
 
-        if ($user && password_verify($password, $user["password"])) {
-
-            // Password correct - save to session
-            $_SESSION["user_id"]   = $user["id"];
-            $_SESSION["full_name"] = $user["full_name"];
-            $_SESSION["email"]     = $email;
-
-            // Redirect to homepage
-            header("Location: /guitarghar/index.php");
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user_id']   = $user['id'];
+            $_SESSION['full_name'] = $user['full_name'];
+            $_SESSION['email']     = $email;
+            header('Location: /guitarghar/index.php');
             exit();
-
-        } else {
-            $error = "Incorrect email or password. Please try again.";
         }
+
+        $error = 'Incorrect email or password. Please try again.';
     }
 }
+
+include 'includes/navbar.php';
 ?>
+<link rel="stylesheet" href="/guitarghar/css/login.css">
 
 <section id="login-page">
 
@@ -119,10 +111,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script>
 function togglePassword(fieldId) {
     var field = document.getElementById(fieldId);
-    if (field.type === "password") {
-        field.type = "text";
+    if (field.type === 'password') {
+        field.type = 'text';
     } else {
-        field.type = "password";
+        field.type = 'password';
     }
 }
 </script>

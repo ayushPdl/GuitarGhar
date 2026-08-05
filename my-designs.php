@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
-    header("Location: /Demguitargharo/login.php");
+    header("Location: /guitarghar/login.php");
     exit();
 }
 
@@ -18,6 +18,13 @@ $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "i", $user_id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
+
+$SHAPE_LABELS = [
+    'strat'    => 'Stratocaster',
+    'lespaul'  => 'Les Paul',
+    'sg'       => 'SG',
+    'acoustic' => 'Acoustic',
+];
 ?>
 
 <?php include "includes/navbar.php"; ?>
@@ -43,7 +50,14 @@ $result = mysqli_stmt_get_result($stmt);
 
                 <div class="card-header">
                     <h2>
-                        <?php echo ucfirst($build["shape"]); ?>
+                        <?php
+                        $shapeKey = $build["shape"];
+                        echo htmlspecialchars(
+                            isset($SHAPE_LABELS[$shapeKey]) ? $SHAPE_LABELS[$shapeKey] : ucfirst($shapeKey),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        );
+                    ?>
                     </h2>
                     <div class="header-right">
                         <span

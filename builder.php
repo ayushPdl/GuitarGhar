@@ -1,4 +1,4 @@
-<?php include 'includes/navbar.php'; ?>
+﻿<?php include 'includes/navbar.php'; ?>
 <link rel="stylesheet" href="/guitarghar/css/builder.css">
 
 <?php include 'includes/db.php'; ?>
@@ -87,21 +87,21 @@
             <div class="control-section">
                 <h4>Body Wood</h4>
                 <select id="b-wood" onchange="handleCustomization(updateSpecs)">
-                    <option value="Alder">Alder — bright, punchy tone</option>
-                    <option value="Mahogany">Mahogany — warm, thick tone</option>
-                    <option value="Basswood">Basswood — balanced, lightweight</option>
-                    <option value="Ash">Ash — bright, resonant twang</option>
-                    <option value="Maple">Maple — very bright, high sustain</option>
-                    <option value="Spruce">Spruce — crisp acoustic tone</option>
+                    <option value="Alder">Alder â€” bright, punchy tone</option>
+                    <option value="Mahogany">Mahogany â€” warm, thick tone</option>
+                    <option value="Basswood">Basswood â€” balanced, lightweight</option>
+                    <option value="Ash">Ash â€” bright, resonant twang</option>
+                    <option value="Maple">Maple â€” very bright, high sustain</option>
+                    <option value="Spruce">Spruce â€” crisp acoustic tone</option>
                 </select>
             </div>
 
             <div class="control-section">
                 <h4>Neck Wood</h4>
                 <select id="b-neckwood" onchange="handleCustomization(updateSpecs)">
-                    <option value="Maple">Maple — bright, fast feel</option>
-                    <option value="Mahogany">Mahogany — warm, smooth</option>
-                    <option value="Rosewood">Rosewood — warm, dark</option>
+                    <option value="Maple">Maple â€” bright, fast feel</option>
+                    <option value="Mahogany">Mahogany â€” warm, smooth</option>
+                    <option value="Rosewood">Rosewood â€” warm, dark</option>
                 </select>
             </div>
 
@@ -117,11 +117,11 @@
             <div class="control-section">
                 <h4>Pickups</h4>
                 <select id="b-pickup" onchange="handleCustomization(function(){ updateSpecs(); drawGuitar(); })">
-                    <option value="SSS">SSS — 3 Single Coils</option>
-                    <option value="HSS">HSS — Humbucker + 2 Singles</option>
-                    <option value="HH">HH — 2 Humbuckers</option>
+                    <option value="SSS">SSS â€” 3 Single Coils</option>
+                    <option value="HSS">HSS â€” Humbucker + 2 Singles</option>
+                    <option value="HH">HH â€” 2 Humbuckers</option>
                     <option value="P90">P90s</option>
-                    <option value="None">None — Acoustic</option>
+                    <option value="None">None â€” Acoustic</option>
                 </select>
             </div>
 
@@ -248,5 +248,6 @@
     var IS_LOGGED_IN = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
 </script>
 
-<?php include 'includes/footer.php'; ?>
 <script src="/guitarghar/js/builder.js"></script>
+
+<?php include 'includes/footer.php'; ?>

@@ -1,4 +1,4 @@
-<footer class="site-footer">
+﻿<footer class="site-footer">
     <div class="footer-container">
         
         <!-- Column 1: Brand Info -->
@@ -33,13 +33,12 @@
             <ul>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li><a href="/guitarghar/my-designs.php">My Designs</a></li>
-                    <li><a href="/guitarghar/logout.php">Logout</a></li>
+                    <li><a href="/guitarghar/logout.php" onclick="event.preventDefault(); document.getElementById('footer-logout-form').submit();">Logout</a><form id="footer-logout-form" action="/guitarghar/logout.php" method="POST" style="display:none;"></form></li>
                 <?php else: ?>
                     <li><a href="/guitarghar/login.php">Login</a></li>
                     <li><a href="/guitarghar/register.php">Register Account</a></li>
                 <?php endif; ?>
-                <li><a href="/guitarghar/faq.php">FAQs</a></li>
-                <li><a href="/guitarghar/contact.php">Contact Us</a></li>
+                <li><a href="/guitarghar/lessons.php">Help & Lessons</a></li>
             </ul>
         </div>
 

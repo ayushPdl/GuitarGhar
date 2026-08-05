@@ -1,4 +1,4 @@
-// ==========================================
+﻿// ==========================================
 // GUITARGHAR - GUITAR TUNER
 // Uses Web Audio API and pitch detection
 // ==========================================
@@ -29,15 +29,28 @@ var mediaStream    = null;
 var rafId          = null;
 var isRunning      = false;
 
+function setText(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
+}
+
+function setStyle(id, prop, value) {
+    var el = document.getElementById(id);
+    if (el) el.style[prop] = value;
+}
+
+function setClass(id, className) {
+    var el = document.getElementById(id);
+    if (el) el.className = className;
+}
+
+
 // ==========================================
 // MODAL CONTROLS
 // ==========================================
 
 function showLoginModal() {
-    var modal = document.getElementById('loginModal');
-    if (modal) {
-        modal.classList.add('active');
-    }
+    window.location.href = '/guitarghar/login.php';
 }
 
 function closeLoginModal() {
@@ -85,11 +98,10 @@ function buildStringButtons() {
             this.classList.add('active');
             targetNote = this.dataset.note;
 
-            document.getElementById('tuner-target').textContent =
-                'Target: ' + targetNote + ' (' + NOTE_FREQ[targetNote].toFixed(1) + ' Hz)';
-            document.getElementById('tuner-status').textContent =
-                'Play the string now';
-            document.getElementById('tuner-status').className = 'tuner-status';
+            setText('tuner-target', 'Target: ' + targetNote + ' (' + NOTE_FREQ[targetNote].toFixed(1) + ' Hz)');
+
+            setText('tuner-status', 'Play the string now');
+            setClass('tuner-status', 'tuner-status');
         });
 
         container.appendChild(btn);
@@ -112,13 +124,13 @@ function setTuning(tuning, btn) {
 
     buildStringButtons();
 
-    document.getElementById('tuner-note').textContent   = '-';
-    document.getElementById('tuner-freq').textContent   = '-- Hz';
-    document.getElementById('tuner-target').textContent = '';
-    document.getElementById('tuner-status').textContent = 'Select a string to begin';
-    document.getElementById('tuner-status').className   = 'tuner-status';
-    document.getElementById('meter-bar').style.width    = '50%';
-    document.getElementById('meter-bar').style.background = '#e8352a';
+    setText('tuner-note', '-');
+    setText('tuner-freq', '-- Hz');
+    setText('tuner-target', '');
+    setText('tuner-status', 'Select a string to begin');
+    setClass('tuner-status', 'tuner-status');
+    setStyle('meter-bar', 'width', '50%');
+    setStyle('meter-bar', 'background', '#e8352a');
 }
 
 // ==========================================
@@ -226,43 +238,55 @@ function updatePitch() {
     if (freq > 50 && freq < 1500) {
 
         var note  = getClosestNote(freq);
-        var cents = getCents(freq, note);
+        // Compare against selected target string when set, otherwise closest note
+        var refNote = targetNote || note;
+        var cents = getCents(freq, refNote);
 
-        document.getElementById('tuner-note').textContent = note;
-        document.getElementById('tuner-freq').textContent = freq.toFixed(1) + ' Hz';
+        setText('tuner-note', note);
+        setText('tuner-freq', freq.toFixed(1) + ' Hz');
 
         var bar = document.getElementById('meter-bar');
-        var pct = Math.min(100, Math.max(0, 50 + cents));
-        bar.style.width = pct + '%';
+        // Clamp meter around center using cents vs target (-50..+50 -> 0..100)
+        var pct = Math.min(100, Math.max(0, 50 + (cents / 50) * 50));
+        if (bar) bar.style.width = pct + '%';
 
-        if (Math.abs(cents) < 5) {
-            bar.style.background = '#2ecc71';
-        } else if (Math.abs(cents) < 15) {
-            bar.style.background = '#f39c12';
-        } else {
-            bar.style.background = '#e8352a';
+        if (bar) {
+            if (Math.abs(cents) < 5) {
+                bar.style.background = '#2ecc71';
+            } else if (Math.abs(cents) < 15) {
+                bar.style.background = '#f39c12';
+            } else {
+                bar.style.background = '#e8352a';
+            }
         }
 
         if (targetNote) {
-            if (note === targetNote && Math.abs(cents) < 5) {
-                document.getElementById('tuner-status').textContent = 'In Tune!';
-                document.getElementById('tuner-status').className   = 'tuner-status status-intune';
+            if (Math.abs(cents) < 5) {
+                setText('tuner-status', 'In Tune!');
+                setClass('tuner-status', 'tuner-status status-intune');
             } else if (cents < -5) {
-                document.getElementById('tuner-status').textContent = 'Too Flat - tune up';
-                document.getElementById('tuner-status').className   = 'tuner-status status-flat';
+                setText('tuner-status', 'Too Flat - tune up');
+                setClass('tuner-status', 'tuner-status status-flat');
             } else if (cents > 5) {
-                document.getElementById('tuner-status').textContent = 'Too Sharp - tune down';
-                document.getElementById('tuner-status').className   = 'tuner-status status-sharp';
+                setText('tuner-status', 'Too Sharp - tune down');
+                setClass('tuner-status', 'tuner-status status-sharp');
             } else {
-                document.getElementById('tuner-status').textContent = 'Almost there...';
-                document.getElementById('tuner-status').className   = 'tuner-status status-close';
+                setText('tuner-status', 'Almost there...');
+                setClass('tuner-status', 'tuner-status status-close');
+            }
+        } else if (cents < -5) {
+                setText('tuner-status', 'Too Flat - tune up'); setClass('tuner-status', 'tuner-status status-flat');
+            } else if (cents > 5) {
+                setText('tuner-status', 'Too Sharp - tune down'); setClass('tuner-status', 'tuner-status status-sharp');
+            } else {
+                setText('tuner-status', 'Almost there...'); setClass('tuner-status', 'tuner-status status-close');
             }
         }
 
     } else {
-        document.getElementById('tuner-note').textContent = '-';
-        document.getElementById('tuner-freq').textContent = '-- Hz';
-        document.getElementById('meter-bar').style.width  = '50%';
+        setText('tuner-note', '-');
+        setText('tuner-freq', '-- Hz');
+        setStyle('meter-bar', 'width', '50%');
     }
 
     rafId = requestAnimationFrame(updatePitch);
@@ -296,8 +320,8 @@ function startTuner() {
 
             isRunning = true;
 
-            document.getElementById('start-btn').style.display = 'none';
-            document.getElementById('stop-btn').style.display  = 'inline-flex';
+            setStyle('start-btn', 'display', 'none');
+            setStyle('stop-btn', 'display', 'inline-flex');
 
             updatePitch();
         })
@@ -326,15 +350,17 @@ function stopTuner() {
         audioCtx = null;
     }
 
-    document.getElementById('tuner-note').textContent   = '-';
-    document.getElementById('tuner-freq').textContent   = '-- Hz';
-    document.getElementById('meter-bar').style.width    = '50%';
-    document.getElementById('meter-bar').style.background = '#e8352a';
-    document.getElementById('tuner-status').textContent = 'Select a string to begin';
-    document.getElementById('tuner-status').className   = 'tuner-status';
-    document.getElementById('start-btn').style.display  = 'inline-flex';
-    document.getElementById('stop-btn').style.display   = 'none';
+    setText('tuner-note', '-');
+    setText('tuner-freq', '-- Hz');
+    setStyle('meter-bar', 'width', '50%');
+    setStyle('meter-bar', 'background', '#e8352a');
+    setText('tuner-status', 'Select a string to begin');
+    setClass('tuner-status', 'tuner-status');
+    setStyle('start-btn', 'display', 'inline-flex');
+    setStyle('stop-btn', 'display', 'none');
 }
 
-// Initial setup call
-buildStringButtons();
+// Initial setup — skip if guest view has no tuner DOM
+if (document.getElementById('string-buttons')) {
+    buildStringButtons();
+}

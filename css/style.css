@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* ==========================================
    GUITARGHAR - MAIN STYLESHEET
@@ -20,6 +20,7 @@ html{
 body{
     width: 100%;
     background-color: #0d0d0d;
+    overflow-x: hidden;
     color: #f0f0f0;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -268,37 +269,42 @@ img{
     display: none;
 }
 
-/* Mobile slide-out menu */
-#mobile-menu{
+/* Mobile auth links — hidden on desktop */
+.nav-auth-mobile{
     display: none;
-    flex-direction: column;
-    background-color: #111111;
-    border-bottom: 1px solid #1e1e1e;
-    padding: 20px 30px;
-    gap: 4px;
 }
 
-#mobile-menu.open{
-    display: flex;
+.nav-close-wrap{
+    display: none;
+    list-style: none;
 }
 
-#mobile-menu a{
-    font-size: 16px;
+.nav-logout-mobile{
+    background: none;
+    border: none;
+    font-family: 'Spartan', sans-serif;
+    font-size: 15px;
     font-weight: 600;
-    color: #888888;
-    padding: 12px 0;
-    border-bottom: 1px solid #1e1e1e;
+    color: #e8352a;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-register-mobile{
+    color: #e8352a !important;
+}
+
+/* Mobile nav overlay */
+#nav-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 998;
+}
+
+#nav-overlay.active{
     display: block;
-    transition: color 0.2s ease;
-}
-
-#mobile-menu a:last-child{
-    border-bottom: none;
-}
-
-#mobile-menu a:hover,
-#mobile-menu a.active{
-    color: #f0f0f0;
 }
 
 
@@ -598,7 +604,7 @@ footer.site-footer {
 }
 
 .footer-logo-img {
-    height: 80px;
+    height: 56px;
     width: auto;
     display: block;
     margin-bottom: 16px;
@@ -713,6 +719,19 @@ footer.site-footer {
         display: none;
     }
 
+    .nav-auth-mobile{
+        display: list-item;
+    }
+
+    .nav-close-wrap{
+        display: list-item;
+    }
+
+    .navbar-logo-img{
+        height: 40px;
+    }
+
+
     .section-p1{
         padding: 40px 20px;
     }
@@ -808,10 +827,23 @@ footer.site-footer {
         display: none;
     }
 
+    .nav-auth-mobile{
+        display: list-item;
+    }
+
+    .nav-close-wrap{
+        display: list-item;
+    }
+
+    .navbar-logo-img{
+        height: 40px;
+    }
+
+
 }
 /* Navbar logo image */
 .navbar-logo-img{
-    height: 65px;
+    height: 48px;
     width: auto;
     display: block;
 }

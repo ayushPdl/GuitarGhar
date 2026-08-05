@@ -1,4 +1,4 @@
-/* ==========================================
+﻿/* ==========================================
    MY DESIGNS PAGE STYLES
 ========================================== */
 
@@ -28,7 +28,7 @@
 /* Grid Layout */
 .design-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 24px;
 }
 
@@ -215,5 +215,18 @@
 
     .design-grid {
         grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 480px) {
+    .designs-page {
+        padding: 28px 16px;
+    }
+
+    .design-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .designs-header h1 {
+        font-size: 28px;
     }
 }
