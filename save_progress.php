@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+require_once __DIR__ . '/includes/mysqli_compat.php';
 include 'includes/db.php';
 
 $user_id   = (int) $_SESSION['user_id'];
@@ -21,12 +22,12 @@ if ($lesson_id === '' || !preg_match('/^[a-z]{3}-\d{2}$/', $lesson_id)) {
 $check = $conn->prepare('SELECT id FROM lessons WHERE lesson_id = ? LIMIT 1');
 $check->bind_param('s', $lesson_id);
 $check->execute();
-$checkResult = $check->get_result();
-if (!$checkResult || $checkResult->num_rows === 0) {
+$found = gg_stmt_fetch_one($check);
+$check->close();
+if (!$found) {
     echo json_encode(['success' => false, 'error' => 'Lesson not found']);
     exit;
 }
-$check->close();
 
 if ($completed === 1) {
     $sql = 'INSERT INTO lesson_progress (user_id, lesson_id, completed)

@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/includes/paths.php';
+require_once __DIR__ . '/includes/mysqli_compat.php';
 session_start();
 include 'includes/db.php';
 
@@ -14,20 +15,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $sql  = 'SELECT id, full_name, password FROM users WHERE email = ?';
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 's', $email);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $user   = mysqli_fetch_assoc($result);
+        if (!$stmt) {
+            $error = 'Something went wrong. Please try again.';
+        } else {
+            mysqli_stmt_bind_param($stmt, 's', $email);
+            mysqli_stmt_execute($stmt);
+            $user = gg_stmt_fetch_one($stmt);
+            mysqli_stmt_close($stmt);
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id']   = $user['id'];
-            $_SESSION['full_name'] = $user['full_name'];
-            $_SESSION['email']     = $email;
-            header('Location: ' . url('index.php'));
-            exit();
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id']   = $user['id'];
+                $_SESSION['full_name'] = $user['full_name'];
+                $_SESSION['email']     = $email;
+                header('Location: ' . url('index.php'));
+                exit();
+            }
+
+            $error = 'Incorrect email or password. Please try again.';
         }
-
-        $error = 'Incorrect email or password. Please try again.';
     }
 }
 
