@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/includes/paths.php';
+require_once __DIR__ . '/includes/mysqli_compat.php';
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
@@ -18,7 +19,8 @@ $sql = "SELECT * FROM guitar_builds
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "i", $user_id);
 mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
+$builds = gg_stmt_fetch_all($stmt);
+mysqli_stmt_close($stmt);
 
 $SHAPE_LABELS = [
     'strat'    => 'Stratocaster',
@@ -42,9 +44,9 @@ include 'includes/navbar.php';
 
         <div class="design-grid" id="design-grid">
 
-        <?php if(mysqli_num_rows($result) > 0): ?>
+        <?php if (count($builds) > 0): ?>
 
-            <?php while($build = mysqli_fetch_assoc($result)): ?>
+            <?php foreach ($builds as $build): ?>
 
             <div class="design-card" id="card-<?php echo $build['id']; ?>">
 
@@ -130,7 +132,7 @@ include 'includes/navbar.php';
 
             </div>
 
-            <?php endwhile; ?>
+            <?php endforeach; ?>
 
         <?php else: ?>
 

@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/includes/paths.php';
+require_once __DIR__ . '/includes/mysqli_compat.php';
 session_start();
 
 include 'includes/db.php';
@@ -27,8 +28,7 @@ if ($user_id) {
     $stmt = $conn->prepare($progress_query);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
-    $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
+    foreach (gg_stmt_fetch_all($stmt) as $row) {
         $completed_lessons[] = $row['lesson_id'];
     }
     $stmt->close();

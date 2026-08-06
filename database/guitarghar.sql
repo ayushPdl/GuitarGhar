@@ -1,17 +1,26 @@
-CREATE DATABASE IF NOT EXISTS guitarghar;
-USE guitarghar;
+-- GuitarGhar schema for shared hosting (ezyro / unaux / InfinityFree)
+--
+-- Do NOT run CREATE DATABASE here — the host already created your DB
+-- (e.g. ezyro_42583908_guitarghar). In phpMyAdmin:
+--   1. Click YOUR database name in the left sidebar
+--   2. Import this file
+--
+-- In includes/config.php set db_name to THAT exact database name.
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- Users
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     full_name    VARCHAR(100)  NOT NULL,
     email        VARCHAR(100)  NOT NULL UNIQUE,
     password     VARCHAR(255)  NOT NULL,
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Lessons content
-CREATE TABLE lessons (
+CREATE TABLE IF NOT EXISTS lessons (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     lesson_id    VARCHAR(10)   NOT NULL UNIQUE,
     level        ENUM('beginner','intermediate','advanced') NOT NULL,
@@ -20,10 +29,10 @@ CREATE TABLE lessons (
     description  TEXT          NOT NULL,
     video_url    VARCHAR(255)  DEFAULT NULL,
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Lesson progress per user
-CREATE TABLE lesson_progress (
+CREATE TABLE IF NOT EXISTS lesson_progress (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     user_id      INT           NOT NULL,
     lesson_id    VARCHAR(10)   NOT NULL,
@@ -31,10 +40,10 @@ CREATE TABLE lesson_progress (
     completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE KEY unique_user_lesson (user_id, lesson_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Guitar builds
-CREATE TABLE guitar_builds (
+CREATE TABLE IF NOT EXISTS guitar_builds (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     user_id      INT           NOT NULL,
     shape        VARCHAR(50)   NOT NULL,
@@ -47,10 +56,10 @@ CREATE TABLE guitar_builds (
     hardware     VARCHAR(50)   NOT NULL,
     saved_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- AI Recommendation history
-CREATE TABLE recommendations (
+CREATE TABLE IF NOT EXISTS recommendations (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     user_id      INT           NOT NULL,
     skill_level  VARCHAR(50)   NOT NULL,
@@ -61,11 +70,12 @@ CREATE TABLE recommendations (
     result       TEXT          NOT NULL,
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+SET FOREIGN_KEY_CHECKS = 1;
 
-
-INSERT INTO `lessons` (`id`, `lesson_id`, `level`, `sort_order`, `title`, `description`, `video_url`, `created_at`) VALUES
+-- Seed lessons (skip rows that already exist)
+INSERT IGNORE INTO `lessons` (`id`, `lesson_id`, `level`, `sort_order`, `title`, `description`, `video_url`, `created_at`) VALUES
 (1, 'beg-01', 'beginner', 1, 'Your First Guitar Chords', 'Learn the very first chords every beginner needs: A, D, and E. We will cover proper finger placement and how to switch between them smoothly.', NULL, '2026-08-05 07:52:28'),
 (2, 'beg-02', 'beginner', 2, 'How to Hold the Guitar & Pick', 'Learn the correct posture, how to hold the guitar, and the proper way to grip the pick for clean, comfortable playing.', NULL, '2026-08-05 07:52:28'),
 (3, 'beg-03', 'beginner', 3, 'Open Chords: G, C and D Major', 'Master the essential open chords G, C, and D. These are the building blocks for thousands of popular songs.', NULL, '2026-08-05 07:52:28'),
