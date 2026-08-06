@@ -1,8 +1,9 @@
 <?php
+require_once __DIR__ . '/includes/paths.php';
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
-    header("Location: /guitarghar/login.php");
+    header("Location: " . url("login.php"));
     exit();
 }
 
@@ -26,7 +27,7 @@ $SHAPE_LABELS = [
     'acoustic' => 'Acoustic',
 ];
 $page_title = 'My Designs | GuitarGhar';
-$page_css = '/guitarghar/css/my-designs.css';
+$page_css = 'css/my-designs.css';
 include 'includes/navbar.php';
 ?>
 
@@ -139,7 +140,7 @@ include 'includes/navbar.php';
                     Build your first custom guitar and click
                     <strong>Save My Build</strong>.
                 </p>
-                <a href="/guitarghar/builder.php" class="build-btn">
+                <a href="<?php echo htmlspecialchars(url('builder.php')); ?>" class="build-btn">
                     Go to Builder
                 </a>
             </div>
@@ -155,10 +156,10 @@ include 'includes/navbar.php';
 <!-- Canvas Rendering Script -->
 <script>
 var IMAGE_PATHS = {
-    strat: '/guitarghar/img/strat.png',
-    lespaul: '/guitarghar/img/lespaul.png',
-    sg: '/guitarghar/img/sg.png',
-    acoustic: '/guitarghar/img/acoustic.png'
+    strat: appUrl('img/strat.png'),
+    lespaul: appUrl('img/lespaul.png'),
+    sg: appUrl('img/sg.png'),
+    acoustic: appUrl('img/acoustic.png')
 };
 
 var loadedImages = {};
@@ -280,7 +281,7 @@ function deleteBuild(buildId) {
     var formData = new FormData();
     formData.append("build_id", buildId);
 
-    fetch("/guitarghar/delete_build.php", {
+    fetch(appUrl("delete_build.php"), {
         method: "POST",
         body: formData
     })
@@ -305,7 +306,7 @@ function deleteBuild(buildId) {
                             <div class="empty-card">
                                 <h2>No saved designs yet.</h2>
                                 <p>Build your first custom guitar and click <strong>Save My Build</strong>.</p>
-                                <a href="/guitarghar/builder.php" class="build-btn">Go to Builder</a>
+                                <a href="<?php echo htmlspecialchars(url('builder.php')); ?>" class="build-btn">Go to Builder</a>
                             </div>
                         `;
                     }

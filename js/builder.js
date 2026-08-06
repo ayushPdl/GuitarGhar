@@ -1,3 +1,5 @@
+function appUrl(path){path=String(path||'').replace(/^\/+/,'');var b=(typeof APP_BASE==='string')?APP_BASE:'';return(b?b:'')+'/'+path;}
+
 // GUITARGHAR - GUITAR BUILDER
 
 // Current state
@@ -6,10 +8,10 @@ var currentColor  = '#c8382a';
 var loadedImages  = {};
 
 var IMAGE_PATHS = {
-    strat: '/guitarghar/img/strat.png',
-    lespaul: '/guitarghar/img/lespaul.png',
-    sg: '/guitarghar/img/sg.png',
-    acoustic: '/guitarghar/img/acoustic.png'
+    strat: appUrl('img/strat.png'),
+    lespaul: appUrl('img/lespaul.png'),
+    sg: appUrl('img/sg.png'),
+    acoustic: appUrl('img/acoustic.png')
 };
 
 var SHAPE_NAMES = {
@@ -238,7 +240,7 @@ function saveBuild() {
     formData.append('bridge',     bridge);
     formData.append('hardware',   hw);
 
-    fetch('/guitarghar/save_build.php', {
+    fetch(appUrl('save_build.php'), {
         method: 'POST',
         body:   formData
     })

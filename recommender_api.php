@@ -1,6 +1,10 @@
-﻿<?php
+<?php
+ob_start();
 session_start();
-header('Content-Type: application/json');
+
+// Drop any accidental BOM/whitespace from includes
+ob_end_clean();
+header('Content-Type: application/json; charset=utf-8');
 
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(['error' => 'Please log in to use the recommender.']);
@@ -11,9 +15,12 @@ $configPath = __DIR__ . '/includes/config.php';
 $apiKey = '';
 
 if (is_file($configPath)) {
+    // Isolate include output (BOM in config.php must not leak into JSON)
+    ob_start();
     $config = include $configPath;
+    ob_end_clean();
     if (is_array($config) && !empty($config['openrouter_api_key'])) {
-        $apiKey = $config['openrouter_api_key'];
+        $apiKey = trim((string) $config['openrouter_api_key']);
     }
 }
 
@@ -39,13 +46,20 @@ if ($skill === '' || $genre === '' || $type === '' || $budget === '') {
 
 $prompt = "Recommend a guitar for someone who is $skill level, likes $genre music, wants $type guitar, budget $budget NPR. Extra: $extra. Give a short, helpful answer in 2-3 sentences.";
 
+if (!function_exists('curl_init')) {
+    echo json_encode(['error' => 'cURL is not enabled on this server.']);
+    exit;
+}
+
 $ch = curl_init('https://openrouter.ai/api/v1/chat/completions');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_TIMEOUT, 45);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Authorization: Bearer ' . $apiKey,
-    'Content-Type: application/json'
+    'Content-Type: application/json',
+    'HTTP-Referer: ' . (isset($_SERVER['HTTP_HOST']) ? ('https://' . $_SERVER['HTTP_HOST']) : 'http://localhost'),
+    'X-Title: GuitarGhar'
 ]);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
     'model' => 'openrouter/free',
@@ -53,7 +67,8 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
 ]));
 
 $response = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlErr  = curl_error($ch);
+$httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($response === false) {
@@ -61,7 +76,7 @@ if ($response === false) {
     exit;
 }
 
-if ($httpCode == 200) {
+if ($httpCode === 200) {
     $result = json_decode($response, true);
     $aiResponse = $result['choices'][0]['message']['content'] ?? null;
     if (!$aiResponse) {
@@ -70,7 +85,9 @@ if ($httpCode == 200) {
     }
 
     if (is_file(__DIR__ . '/includes/db.php')) {
+        ob_start();
         include __DIR__ . '/includes/db.php';
+        ob_end_clean();
         if (isset($conn) && $conn) {
             $uid = (int) $_SESSION['user_id'];
             $ins = mysqli_prepare(
@@ -85,7 +102,8 @@ if ($httpCode == 200) {
         }
     }
 
-    echo json_encode(['result' => $aiResponse]);
-} else {
-    echo json_encode(['error' => 'AI is busy. Please try again.']);
+    echo json_encode(['result' => $aiResponse], JSON_UNESCAPED_UNICODE);
+    exit;
 }
+
+echo json_encode(['error' => 'AI is busy. Please try again.']);

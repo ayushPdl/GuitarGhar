@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/includes/paths.php';
 session_start();
 
 include 'includes/db.php';
@@ -34,7 +35,7 @@ if ($user_id) {
 }
 
 $page_title = 'Guitar Lessons | GuitarGhar';
-$page_css = '/guitarghar/css/lessons.css';
+$page_css = 'css/lessons.css';
 include 'includes/navbar.php';
 ?>
 
@@ -93,7 +94,7 @@ include 'includes/navbar.php';
                                  style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
                             <div class="login-lock-overlay">
                                 <span class="lock-icon">&#128274;</span>
-                                <a href="/guitarghar/login.php" class="login-to-watch">Login to Watch</a>
+                                <a href="<?php echo htmlspecialchars(url('login.php')); ?>" class="login-to-watch">Login to Watch</a>
                             </div>
                         <?php else: ?>
                             <div class="video-placeholder">Video coming soon</div>
@@ -108,7 +109,7 @@ include 'includes/navbar.php';
                             <?php if (!$has_data): ?>
                                 <button type="button" class="btn-mark-done" disabled>Mark as Done</button>
                             <?php elseif (!$user_id): ?>
-                                <a href="/guitarghar/login.php" class="btn-mark-done">Mark as Done</a>
+                                <a href="<?php echo htmlspecialchars(url('login.php')); ?>" class="btn-mark-done">Mark as Done</a>
                             <?php else: ?>
                                 <?php if ($is_completed): ?>
                                     <span class="badge-completed">Completed</span>
@@ -145,7 +146,7 @@ function toggleProgress(lessonId, status) {
     formData.append('lesson_id', lessonId);
     formData.append('completed', status);
 
-    fetch('/guitarghar/save_progress.php', {
+    fetch(appUrl('save_progress.php'), {
         method: 'POST',
         body: formData
     })

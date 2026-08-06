@@ -1,6 +1,6 @@
 <?php
 $page_title = 'AI Guitar Recommender | GuitarGhar';
-$page_css = '/guitarghar/css/recommender.css';
+$page_css = 'css/recommender.css';
 include 'includes/navbar.php';
 ?>
 <div class="page-header rec-header">
@@ -99,8 +99,8 @@ include 'includes/navbar.php';
     <h4>Login Required</h4>
     <p>You need a GuitarGhar account to get AI recommendations.</p>
     <div class="prompt-btns">
-        <a href="/guitarghar/login.php" class="btn-red btn-lg">Login</a>
-        <a href="/guitarghar/register.php" class="btn-outline btn-lg">Register Free</a>
+        <a href="<?php echo htmlspecialchars(url('login.php')); ?>" class="btn-red btn-lg">Login</a>
+        <a href="<?php echo htmlspecialchars(url('register.php')); ?>" class="btn-outline btn-lg">Register Free</a>
     </div>
 </div>
             
@@ -154,12 +154,20 @@ function getRecommendation() {
     formData.append('budget', budget);
     formData.append('extra',  extra);
 
-    fetch('/guitarghar/recommender_api.php', {
+    fetch(appUrl('recommender_api.php'), {
         method: 'POST',
         body:   formData
     })
     .then(function(response) {
-        return response.json();
+        return response.text().then(function(text) {
+            // Strip UTF-8 BOM / leading junk some PHP setups prepend
+            text = String(text || '').replace(/^\uFEFF/, '').trim();
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                throw new Error('Server returned invalid JSON. Please try again.');
+            }
+        });
     })
     .then(function(data) {
         document.getElementById('rec-loading').style.display    = 'none';
