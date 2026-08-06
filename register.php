@@ -173,15 +173,16 @@ include 'includes/navbar.php';
 
 </section>
 
-<?php include 'includes/footer.php'; ?>
-
-<script>
+<?php
+$page_scripts = '<script>
 function togglePassword(fieldId) {
     var field = document.getElementById(fieldId);
-    if (field.type === 'password') {
-        field.type = 'text';
+    if (field.type === "password") {
+        field.type = "text";
     } else {
-        field.type = 'password';
+        field.type = "password";
     }
 }
-</script>
+</script>';
+include 'includes/footer.php';
+?>

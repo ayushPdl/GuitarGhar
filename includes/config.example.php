@@ -1,9 +1,13 @@
 <?php
-// Copy this file to config.php (gitignored).
-// base_path is optional — leave unset to auto-detect.
-// For domain-root hosting you can force: 'base_path' => ''
-// For a subfolder install: 'base_path' => '/guitarghar'
+// Copy this file to config.php on the server (config.php is gitignored).
+//
+// LIVE: site files are in htdocs/public_html with NO subfolder
+//   => base_path must be empty
+//
+// LOCAL XAMPP only (folder htdocs/guitarghar):
+//   => 'base_path' => '/guitarghar'
 
 return [
     'openrouter_api_key' => 'sk-or-v1-YOUR_KEY_HERE',
+    'base_path' => '',
 ];

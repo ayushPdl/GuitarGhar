@@ -480,3 +480,8 @@
         height: 56px;
     }
 }
+.preset-color.active {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #e8352a;
+}

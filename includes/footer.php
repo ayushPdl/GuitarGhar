@@ -58,5 +58,7 @@
     </div>
 </footer>
 
+<?php if (!empty($page_scripts)) echo $page_scripts; ?>
+
 </body>
 </html>

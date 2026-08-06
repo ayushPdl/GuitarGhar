@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&display=swap');
 
 /* ==========================================
    GUITARGHAR - MAIN STYLESHEET
@@ -9,18 +9,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Spartan', sans-serif;
+    font-family: 'League Spartan', 'Spartan', sans-serif;
 }
 
 /* Base */
 html{
     scroll-behavior: smooth;
+    max-width: 100%;
 }
 
 body{
     width: 100%;
     background-color: #0d0d0d;
-    overflow-x: hidden;
     color: #f0f0f0;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -72,6 +72,7 @@ a{
 
 img{
     max-width: 100%;
+    height: auto;
     display: block;
 }
 
@@ -96,6 +97,8 @@ img{
     gap: 24px;
     padding: 0 80px;
     height: 70px;
+    min-height: 70px;
+    width: 100%;
     background-color: #111111;
     border-bottom: 1px solid #1e1e1e;
     position: sticky;
@@ -267,18 +270,43 @@ img{
     gap: 10px;
 }
 
+
+.nav-icon-btn{
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: #f0f0f0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 #bar{
     display: none;
     font-size: 1.2rem;
     cursor: pointer;
     color: #f0f0f0;
+    line-height: 1;
+}
+
+#bar::before{
+    content: '\2630';
+    font-style: normal;
+    font-family: sans-serif;
 }
 
 #close{
     display: none;
+    line-height: 1;
 }
 
-/* Mobile auth links — hidden on desktop */
+#close::before{
+    content: '\2715';
+    font-style: normal;
+    font-family: sans-serif;
+}
+
+/* Mobile auth links â€” hidden on desktop */
 .nav-auth-mobile{
     display: none;
 }
@@ -291,7 +319,7 @@ img{
 .nav-logout-mobile{
     background: none;
     border: none;
-    font-family: 'Spartan', sans-serif;
+    font-family: 'League Spartan', 'Spartan', sans-serif;
     font-size: 15px;
     font-weight: 600;
     color: #e8352a;
@@ -482,7 +510,7 @@ a.btn-ghost:hover{
 
 
 
-/* Shared page header — matches tuner page */
+/* Shared page header â€” matches tuner page */
 .page-header{
     padding: 60px 80px 32px 80px;
     border-bottom: 1px solid #1e1e1e;
@@ -730,10 +758,10 @@ footer.site-footer {
 
 }
 
-@media(max-width: 799px){
+@media(max-width: 1024px){
 
     #header{
-        padding: 0 30px;
+        padding: 0 24px;
     }
 
     #navbar{
@@ -762,8 +790,9 @@ footer.site-footer {
         margin-bottom: 25px;
     }
 
+    
     #bar{
-        display: block;
+        display: inline-flex;
     }
 
     #mobile{
@@ -771,7 +800,7 @@ footer.site-footer {
     }
 
     #close{
-        display: initial;
+        display: inline-flex;
         position: absolute;
         top: 30px;
         left: 30px;
@@ -886,7 +915,7 @@ footer.site-footer {
     gap: 12px;
 }
 
-@media(max-width: 799px){
+@media(max-width: 1024px){
 
     .navbar-auth{
         display: none;

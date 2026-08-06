@@ -107,9 +107,8 @@ include 'includes/navbar.php';
     </div>
 
 </section>
-
-<?php include 'includes/footer.php'; ?>
-
+<?php
+$page_scripts = <<<'JS'
 <script>
 function togglePassword(fieldId) {
     var field = document.getElementById(fieldId);
@@ -120,3 +119,6 @@ function togglePassword(fieldId) {
     }
 }
 </script>
+JS;
+include 'includes/footer.php';
+?>

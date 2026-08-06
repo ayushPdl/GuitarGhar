@@ -50,7 +50,7 @@ function setClass(id, className) {
 // ==========================================
 
 function showLoginModal() {
-    window.location.href = (typeof appUrl==='function'?appUrl('login.php'):'/login.php');
+    window.location.href = (typeof appUrl === 'function') ? appUrl('login.php') : 'login.php';
 }
 
 function closeLoginModal() {

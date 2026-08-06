@@ -159,7 +159,15 @@ function getRecommendation() {
         body:   formData
     })
     .then(function(response) {
-        return response.json();
+        return response.text().then(function(text) {
+            // Strip UTF-8 BOM / leading junk some PHP setups prepend
+            text = String(text || '').replace(/^\uFEFF/, '').trim();
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                throw new Error('Server returned invalid JSON. Please try again.');
+            }
+        });
     })
     .then(function(data) {
         document.getElementById('rec-loading').style.display    = 'none';

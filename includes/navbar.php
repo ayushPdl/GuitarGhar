@@ -112,7 +112,7 @@ function appUrl(path) {
             <?php endif; ?>
 
             <li class="nav-close-wrap">
-                <i id="close" class="fa-solid fa-xmark" onclick="closeMobileMenu()" aria-label="Close menu"></i>
+                <button type="button" id="close" class="nav-icon-btn" onclick="closeMobileMenu()" aria-label="Close menu"></button>
             </li>
         </ul>
 
@@ -152,7 +152,7 @@ function appUrl(path) {
                     <i class="fa-solid fa-guitar" style="font-size: 20px; color: #e8352a;"></i>
                 </a>
             <?php endif; ?>
-            <i id="bar" class="fa-solid fa-bars" onclick="openMobileMenu()" aria-label="Open menu"></i>
+            <button type="button" id="bar" class="nav-icon-btn" onclick="openMobileMenu()" aria-label="Open menu"></button>
         </div>
 
     </div>
